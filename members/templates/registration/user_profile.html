@@ -1,0 +1,39 @@
+{%extends 'base.html'%}
+{%block title%}User Profile{%endblock %}
+
+{%block content%}
+<h1>User Profile<h1>
+
+
+    {{ page_user}}
+    <div class="card" >
+        {% if page_user.profie_pic %}
+            <img src='{{page_user.profie_pic.url}}' class="rounded-circle" width=200 height=200>
+        {%else%}
+        <img src='https://t3.ftcdn.net/jpg/00/64/67/52/240_F_64675209_7ve2XQANuzuHjMZXP3aIYIpsDKEbF5dD.jpg' class="rounded-circle" width=200 height=200>
+        {%endif%}
+    <div class="card-body">
+      <h5 class="card-title">{{post.author.prof_inf.user}}</h5>
+
+      <small>
+          <p class="card-text">{{page_user.bio}}</p>
+    </div>
+    
+    <div class="card-body">
+        {% if page_user.web_site %}
+            <a href="{{page_user.web_site}}" class="card-link">website</a>
+        {%endif%}
+        {% if page_user.facebook_url %}
+            <a href="{{page_user.facebook_url}}" class="card-link">facebook</a>
+        {%endif%}
+        {% if page_user.twitter_utl %}
+            <a href="{{page_user.twitter_utl}}" class="card-link">twitter</a>
+        {%endif%}
+    </small>
+    </div>
+  </div>
+  
+  
+
+
+{%endblock%}

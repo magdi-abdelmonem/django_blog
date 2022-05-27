@@ -1,0 +1,71 @@
+{%extends 'base.html'%}
+{%block title%}{{post.title}}{%endblock %}
+
+{%block content%}
+post author id : {{post.author.id}}<br>
+user id   : {{user.id}}
+
+    <h1>{{post.title}}<h1>
+        
+        <small>{{post.author.first_name}} {{post.author.last_name}} {{post.author.id}} - {{post.post_data}}
+        {%if user.is_authenticated %}
+            {% if user.id == post.author.id %}
+                <a href='{% url "update_post" post.pk%}'>(تعديل)</a></small> 
+            {%endif%}
+        {%endif%}
+        <hr>
+        <br>
+        {% if post.header_image %}
+        <img src='{{post.header_image.url}} 'width=200 height=200 >
+        {%endif%}
+        {{ post.body |safe }}
+        
+        
+        
+
+
+    <br><br>
+    <a href="{% url 'home' %}" class="btn btn-dark">Back</a>
+<!--
+    <br><br>
+    <form action = "{% url 'like_post' post.pk %}" method="POST">
+        {%csrf_token%}
+        
+        <button  type="submit" ,name="post_id", value
+        ="{{ post.id }}" class="btn btn-primary btn-sm">Like</button>
+        {{total_likes}}
+
+    </form>
+-->
+
+<hr>
+<br>
+
+
+<div class="card" >
+        {% if post.author.prof_inf.profie_pic %}
+            <img src='{{post.author.prof_inf.profie_pic.url}}' class="rounded-circle" width=200 height=200>
+        {%else%}
+        <img src='https://t3.ftcdn.net/jpg/00/64/67/52/240_F_64675209_7ve2XQANuzuHjMZXP3aIYIpsDKEbF5dD.jpg' class="rounded-circle" width=200 height=200>
+        {%endif%}
+    <div class="card-body">
+      <h5 class="card-title">{{post.author.prof_inf.user}}</h5>
+
+      <small>
+          <p class="card-text">{{post.author.prof_inf.bio}}</p>
+    </div>
+    <div class="card-body">
+        <a href="{% url 'user_profile' post.author.prof_inf.id %}" class="card-link">profile page</a>
+        {% if post.author.prof_inf.web_site %}
+            <a href="{{post.author.prof_inf.web_site}}" class="card-link">website</a>
+        {%endif%}
+        {% if post.author.prof_inf.facebook_url %}
+            <a href="{{post.author.prof_inf.facebook_url}}" class="card-link">facebook</a>
+        {%endif%}
+        {% if post.author.prof_inf.twitter_utl %}
+            <a href="{{post.author.prof_inf.twitter_utl}}" class="card-link">twitter</a>
+        {%endif%}
+    </small>
+    </div>
+  </div>
+{%endblock%}

@@ -1,0 +1,33 @@
+{%extends 'base.html'%}
+{%block title%}Create A New Post {%endblock %}
+
+{%block content%}
+
+    {%if user.is_authenticated%}
+        <h1>Adding New Post<h1>
+        <br><br>
+        <div class="form-group">
+            <form method="POST" enctype="multipart/form-data"> 
+                {%csrf_token%}
+                {{form.media}}                                              <!--add feathers for textbody-->
+                {{form.as_p}}
+                
+                <button class="btn btn-primary" type="submit">POST</button>
+        </div>
+
+        <script>                                            <!-- connect author with user id and make auther fill auto and hide it from the user-->
+            var name="{{user.id}}";
+            document.getElementById('elder').value =
+             name;
+        </script>
+        
+
+    {%else%}
+        <h1>Sorry you should Login .... First<h1><br>
+
+            <a class="btn btn-primary btn-lg" href="{%url 'login' %}" role="button">Login</a>   
+            
+            <a class="btn btn-primary btn-lg" href="{%url 'register' %}" role="button">Register</a> 
+    {%endif%}
+
+{%endblock%}

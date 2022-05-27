@@ -1,0 +1,20 @@
+{%extends 'base.html'%}
+{%block title%} Updating A Post {%endblock %}
+
+{%block content%}
+
+    <br><br>
+        {% if user.id == post.author.id %}
+            <h1>Edit your Post<h1>
+            <div class="form-group">
+                <form method="POST" enctype="multipart/form-data"> 
+                    {%csrf_token%}
+                    {{form.media}}
+                    {{form.as_p}}
+                    <button class="btn btn-primary" type="submit">Update</button>
+            </div>
+        {% else %}
+            <h1>You cannot edit this Post ....<h1>
+        {% endif %}
+
+{%endblock%}

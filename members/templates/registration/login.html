@@ -1,0 +1,24 @@
+{%extends 'base.html'%}
+{%block title%} Login .... {%endblock %}
+
+{%block content%}
+<h1>Login Now</h1>
+
+<br><br>
+<div class="form-group">
+    <form method="POST">
+        {%csrf_token%}
+
+        <input type="text" class="form-control" name="username">
+</div>
+<div class="form-group">
+<input type="password" class="form-control" name="password">
+</div>
+<div>
+        <button class="btn btn-primary btn-lg" type="submit">Login</button>
+         Not registered Sign Up <a href="{%url 'register'%}">her</a>
+</div>
+
+
+
+{%endblock%}
